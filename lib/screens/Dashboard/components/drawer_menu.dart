@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:responsive_admin_dashboard/constants/constants.dart';
 import 'package:responsive_admin_dashboard/screens/Dashboard/components/dashboard_content.dart';
 import 'package:responsive_admin_dashboard/screens/Dashboard/dash_board_screen.dart';
+import 'package:responsive_admin_dashboard/screens/login/login_view.dart';
+import 'package:responsive_admin_dashboard/screens/posts/post_main.dart';
 import 'package:responsive_admin_dashboard/screens/upload/upload_main.dart';
 import 'package:responsive_admin_dashboard/screens/users/user_main.dart';
 
@@ -34,13 +37,13 @@ class DrawerMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              DrawerListTile(
-                  title: 'Dashboard',
-                  svgSrc: 'assets/icons/Dashboard.svg',
-                  tap: () {
-                    Get.to(DashBoardScreen());
-                    print('Dashboard screen butoon clicked');
-                  }),
+              // DrawerListTile(
+              //     title: 'Dashboard',
+              //     svgSrc: 'assets/icons/Dashboard.svg',
+              //     tap: () {
+              //       Get.to(DashBoardScreen());
+              //       print('Dashboard screen butoon clicked');
+              //     }),
               DrawerListTile(
                   title: 'Post Upload',
                   svgSrc: 'assets/icons/BlogPost.svg',
@@ -62,6 +65,13 @@ class DrawerMenu extends StatelessWidget {
                     Get.to(UserScreen());
                     print('User screen butoon clicked');
                   }),
+              DrawerListTile(
+                  title: 'Posts',
+                  svgSrc: 'assets/icons/Statistics.svg',
+                  tap: () {
+                    Get.to(PostScreen());
+                    print('Post screen butoon clicked');
+                  }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: appPadding * 2),
                 child: Divider(
@@ -70,13 +80,11 @@ class DrawerMenu extends StatelessWidget {
                 ),
               ),
               DrawerListTile(
-                  title: 'Settings',
-                  svgSrc: 'assets/icons/Setting.svg',
-                  tap: () {}),
-              DrawerListTile(
                   title: 'Logout',
                   svgSrc: 'assets/icons/Logout.svg',
-                  tap: () {
+                  tap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Get.offAll(LoginScreen());
                     print('Log screen butoon clicked');
                   }),
             ],

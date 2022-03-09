@@ -4,9 +4,6 @@ import 'package:responsive_admin_dashboard/constants/responsive.dart';
 import 'package:responsive_admin_dashboard/controllers/controller.dart';
 import 'package:provider/provider.dart';
 
-import 'profile_info.dart';
-import 'search_field.dart';
-
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({Key? key}) : super(key: key);
 

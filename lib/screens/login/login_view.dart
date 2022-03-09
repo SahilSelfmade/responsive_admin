@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_admin_dashboard/screens/Dashboard/dash_board_screen.dart';
+import 'package:responsive_admin_dashboard/screens/posts/post_main.dart';
 
 import '../../resources/auth_methods.dart';
 import '../../widgets/text_field_input.dart';
-
+import '../upload/upload_main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -26,8 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
-    setState(() {
-    });
+    setState(() {});
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
@@ -44,11 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.white,
         );
       });
-      Get.offAll(const DashBoardScreen());
+      Get.offAll(const PostUploadScreen());
     } else if (_emailController.text.isEmpty ||
         _passwordController.text.isEmpty) {
-      setState(() {
-      });
+      setState(() {});
       Get.snackbar(
         'Login Failed',
         'All fields are Required.',
@@ -61,8 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
         snackPosition: SnackPosition.BOTTOM,
       );
     } else if (_passwordController.text.length < 6) {
-      setState(() {
-      });
+      setState(() {});
       Get.snackbar(
         'Login Failed',
         'Password Length is too Short.',
@@ -75,8 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
         snackPosition: SnackPosition.BOTTOM,
       );
     } else if (_emailController.text.isEmail != true) {
-      setState(() {
-      });
+      setState(() {});
       Get.snackbar(
         'Login Failed',
         'Please Enter a Valid E-Mail.',
@@ -89,8 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
         snackPosition: SnackPosition.BOTTOM,
       );
     } else {
-      setState(() {
-      });
+      setState(() {});
       Get.snackbar(
         'Login Failed',
         'Wrong Credentials',
@@ -124,17 +120,44 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(
-                    height: 24,
+                    height: 44,
                   ),
-                  Text(
-                    'Logo Area',
-                    style: GoogleFonts.oswald(
-                      textStyle: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Welcome to ',
+                          style: GoogleFonts.oswald(
+                            fontSize: 34,
+                          ),
+                        ),
+                        TextSpan(
+                            text: 'Mission K3',
+                            style: GoogleFonts.oswald(
+                              color: Color(0xff21a179),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 34,
+                            )),
+                        TextSpan(
+                          text: '!',
+                          style: GoogleFonts.oswald(
+                            fontSize: 34,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  // Text(
+                  //   'Logo Area',
+                  //   style: GoogleFonts.oswald(
+                  //     textStyle: const TextStyle(
+                  //         fontSize: 24,
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.black),
+                  //   ),
+                  // ),
 
                   const SizedBox(
                     height: 64,

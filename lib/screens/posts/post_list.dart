@@ -3,22 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_admin_dashboard/screens/Dashboard/components/custom_appbar.dart';
+import 'post_detail.dart';
 
-import 'edit_user.dart';
-import 'user_detail.dart';
-
-class UserDetails extends StatefulWidget {
+class PostDetails extends StatefulWidget {
   @override
-  _UserDetailsState createState() => _UserDetailsState();
+  _PostDetailsState createState() => _PostDetailsState();
 }
 
-class _UserDetailsState extends State<UserDetails> {
-  CollectionReference owners = FirebaseFirestore.instance.collection('users');
-  final Stream<QuerySnapshot> ownersStream =
-      FirebaseFirestore.instance.collection('users').snapshots();
+class _PostDetailsState extends State<PostDetails> {
+  CollectionReference posts =
+      FirebaseFirestore.instance.collection('home_posts');
+  final Stream<QuerySnapshot> postsStream =
+      FirebaseFirestore.instance.collection('home_posts').snapshots();
 
   Future<void> deleteUser(id) {
-    return owners
+    return posts
         .doc(id)
         .delete()
         .then((value) => Get.snackbar(
@@ -58,7 +57,7 @@ class _UserDetailsState extends State<UserDetails> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: ownersStream,
+        stream: postsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             print('Something Went Wrong');
@@ -92,26 +91,18 @@ class _UserDetailsState extends State<UserDetails> {
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
                           columns: [
-                            _topRow("First Name"),
-                            _topRow('Last Name'),
-                            _topRow('Phone'),
-                            _topRow('Reffered By'),
+                            _topRow("Post Description"),
+                            _topRow('Post Type'),
                             _topRow('Action')
                           ],
                           rows: [
                             for (var i = 0; i < userDetails.length; i++) ...[
                               DataRow(cells: [
                                 DataCell(Text(
-                                  userDetails[i]['first_name'].toString(),
+                                  userDetails[i]['description'].toString(), 
                                 )),
                                 DataCell(Text(
-                                  userDetails[i]['last_name'].toString(),
-                                )),
-                                DataCell(Text(
-                                  userDetails[i]['phone_number'].toString(),
-                                )),
-                                DataCell(Text(
-                                  userDetails[i]['referred_by'].toString(),
+                                  userDetails[i]['post_type'].toString(),
                                 )),
                                 DataCell(
                                   Row(
@@ -124,22 +115,7 @@ class _UserDetailsState extends State<UserDetails> {
                                           ),
                                           onPressed: () {
                                             Get.to(
-                                              () => UserDetailsPage(
-                                                  id: userDetails[i]['id']),
-                                            );
-                                            // print(userDetails);
-                                          },
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: IconButton(
-                                          icon: const Icon(
-                                            Icons.edit,
-                                            color: Colors.black,
-                                          ),
-                                          onPressed: () {
-                                            Get.to(
-                                              () => UserDetailsEditPage(
+                                              () => PostDetailsPage(
                                                   id: userDetails[i]['id']),
                                             );
                                             // print(userDetails);

@@ -26,19 +26,11 @@ class AudioScreen extends StatelessWidget {
                 child: DrawerMenu(),
               ),
             Expanded(
-              child: Container(),
-              flex: 1,
-            ),
-            Expanded(
-              flex: 2,
+              flex: 5,
               child: Padding(
                 padding: const EdgeInsets.all(appPadding),
                 child: AudioUpload(),
               ),
-            ),
-            Expanded(
-              child: Container(),
-              flex: 1,
             ),
           ],
         ),

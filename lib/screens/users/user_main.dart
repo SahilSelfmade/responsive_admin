@@ -28,19 +28,11 @@ class UserScreen extends StatelessWidget {
                 child: DrawerMenu(),
               ),
             Expanded(
-              child: Container(),
-              flex: 1,
-            ),
-            Expanded(
-              flex: 3,
+              flex: 5,
               child: Padding(
                 padding: const EdgeInsets.all(appPadding),
                 child: UserDetails(),
               ),
-            ),
-            Expanded(
-              child: Container(),
-              flex: 1,
             ),
           ],
         ),

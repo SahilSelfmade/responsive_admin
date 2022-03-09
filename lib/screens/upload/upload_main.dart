@@ -19,31 +19,20 @@ class PostUploadScreen extends StatelessWidget {
       drawer: DrawerMenu(),
       key: context.read<Controller>().scaffoldKey,
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
-              Expanded(
-                flex: 1,
-                child: DrawerMenu(),
-              ),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          if (Responsive.isDesktop(context))
             Expanded(
-              child: Container(),
               flex: 1,
+              child: DrawerMenu(),
             ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(appPadding),
-                child: PostUpload(),
-              ),
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(appPadding),
+              child: PostUpload(),
             ),
-            Expanded(
-              child: Container(),
-              flex: 1,
-            ),
-          ],
-        ),
+          ),
+        ]   ),
       ),
     );
   }

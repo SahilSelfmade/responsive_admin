@@ -20,7 +20,11 @@ class DashBoardScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (Responsive.isDesktop(context)) Expanded(child: DrawerMenu(),),
+            if (Responsive.isDesktop(context))
+              Expanded(
+                child: DrawerMenu(),
+                flex: 1,
+              ),
             Expanded(
               flex: 5,
               child: DashboardContent(),
